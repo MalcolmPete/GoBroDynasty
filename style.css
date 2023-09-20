@@ -1,0 +1,39 @@
+/* Style for the h1 heading */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-style: italic;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+/* Style for buttons */
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+}
+
+/* Style for the table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Style for hiding columns (customize this if needed) */
+[data-colname="player_id"],
+[data-colname="owner_id"] {
+    display: none;
+}
