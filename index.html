@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spreadsheet Display</title>
+
+    <!-- Required libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Optional styling (you can customize this) -->
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spreadsheet Display</h1>
+
+    <!-- Empty HTML element for the table -->
+    <table id="spreadsheet"></table>
+
+    <script>
+        // Function to fetch and display spreadsheet data
+        function displaySpreadsheetData() {
+            const spreadsheetTable = document.getElementById('spreadsheet');
+            const spreadsheetURL = 'https://username.github.io/repository-name/teams.xlsx'; // Replace with your GitHub Pages URL
+
+            // Fetch the spreadsheet file
+            fetch(spreadsheetURL)
+                .then((response) => response.arrayBuffer())
+                .then((data) => {
+                    // Parse the spreadsheet data using SheetJS
+                    const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
+
+                    // Get the first sheet (assuming it's the "Summary" sheet)
+                    const sheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[sheetName];
+
+                    // Convert sheet data to HTML table
+                    const table = XLSX.utils.sheet_to_html(worksheet, {
+                        header: '<th></th>',
+                        tableClass: 'table table-bordered table-hover', // Add styling classes if desired
+                    });
+
+                    // Display the table in the designated element
+                    spreadsheetTable.innerHTML = table;
+                })
+                .catch((error) => {
+                    console.error('Error fetching or displaying spreadsheet:', error);
+                });
+        }
+
+        // Call the function to display spreadsheet data when the page loads
+        window.onload = displaySpreadsheetData;
+    </script>
+</body>
+</html>
